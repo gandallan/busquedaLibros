@@ -18,69 +18,79 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var portadaLibro: UIImageView!
     
-
-    @IBAction func buscarISBNButton(sender: UIButton) {
-        
-        buscasrLibro()
+    
+    
+ 
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
     }
+    
+    
+    
+    @IBAction func buscarISBNButton(sender: UIButton) {
+        
+           buscasrLibro()
+    }
+    
     
     func buscasrLibro(){
         
-        //PORTADA
-      
-        
-        //ISBN
-        let ISBN:String = searchISBN.text!
-        let urls:String = "https://openlibrary.org/api/books?jscmd=data&format=json&bibkeys=ISBN:\(ISBN)"
-        let url = NSURL(string: urls)
-        let datos = NSData(contentsOfURL: url!)
-        
-        
-        
-        do{
             
-            let json = try NSJSONSerialization.JSONObjectWithData(datos!, options: NSJSONReadingOptions.MutableLeaves)
-            //TITULO
-            let diccionario1 = json as! NSDictionary
-            let diccionario2 = diccionario1["ISBN:\(ISBN)"] as! NSDictionary
-            tituloLibro.text = diccionario2["title"] as! NSString as String
-            let diccionario3 = diccionario2["cover"] as! NSDictionary
-         
-            //PORTADA
-            if let checkedUrl = NSURL(string: "\(diccionario3["medium"]!)") {
-                portadaLibro.contentMode = .ScaleAspectFit
-                downloadImage(checkedUrl)
+            //ISBN
+            let ISBN:String = searchISBN.text!
+            let urls:String = "https://openlibrary.org/api/books?jscmd=data&format=json&bibkeys=ISBN:\(ISBN)"
+            let url = NSURL(string: urls)
+            let datos = NSData(contentsOfURL: url!)
+            
+            if ISBN != "" {
+            
+            do{
+                
+                let json = try NSJSONSerialization.JSONObjectWithData(datos!, options: NSJSONReadingOptions.MutableLeaves)
+                //TITULO
+                let diccionario1 = json as! NSDictionary
+
+                let diccionario2 = diccionario1["ISBN:\(ISBN)"] as! NSDictionary
+                tituloLibro.text = diccionario2["title"] as! NSString as String
+                let diccionario3 = diccionario2["cover"] as! NSDictionary
+                
+                //PORTADA
+                if let checkedUrl = NSURL(string: "\(diccionario3["medium"]!)") {
+                    portadaLibro.contentMode = .ScaleAspectFit
+                    downloadImage(checkedUrl)
+                }
+                
+                //AUTORES
+                let diccionario4 = diccionario2["authors"] as! NSArray
+                let diccionario5 = diccionario4.valueForKey("name")
+                let diccionario6 = diccionario5[0] as! String as String
+                autoresLibro.text = diccionario6
+                
+                
             }
+                
+                
+            catch _{
+                
+            }
+
             
-            //AUTORES
-            let diccionario4 = diccionario2["authors"] as! NSArray
-            let diccionario5 = diccionario4.valueForKey("name")
-            let diccionario6 = diccionario5[0] as! String as String
-            autoresLibro.text = diccionario6
            
+        }else{
+            
+            let alert = UIAlertController(title: "Alert", message: "Type a ISBN", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
             
         }
-            
-        
-        catch _{
-            
-        }
-        
         
     }
-    
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
     
-        
-
-        
-        
-    }
-    
-    
+//**funciones para la imagen
     
     func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
         
@@ -100,13 +110,6 @@ class ViewController: UIViewController {
                 self.portadaLibro.image = UIImage(data: data)
             }
         }
-    }
-    
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
