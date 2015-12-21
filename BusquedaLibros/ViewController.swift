@@ -10,14 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var searchISBN: UISearchBar!
+
+    @IBOutlet weak var searchISBN: UITextField!
     
     @IBOutlet weak var tituloLibro: UILabel!
     
     @IBOutlet weak var autoresLibro: UILabel!
     
     @IBOutlet weak var portadaLibro: UIImageView!
-    
     
     
  
@@ -28,11 +28,17 @@ class ViewController: UIViewController {
     }
     
     
-    
-    @IBAction func buscarISBNButton(sender: UIButton) {
-        
-           buscasrLibro()
+    @IBAction func clear(sender: UIButton) {
+        searchISBN.text = ""
     }
+    
+    
+    @IBAction func buscarISBNButton(sender: UITextField) {
+        
+        buscasrLibro()
+        
+    }
+    
     
     
     func buscasrLibro(){
@@ -41,17 +47,19 @@ class ViewController: UIViewController {
             //ISBN
             let ISBN:String = searchISBN.text!
             let urls:String = "https://openlibrary.org/api/books?jscmd=data&format=json&bibkeys=ISBN:\(ISBN)"
-            let url = NSURL(string: urls)
-            let datos = NSData(contentsOfURL: url!)
+            let url = NSURL(string: urls)!
+            let datos = NSData(contentsOfURL: url)
+        
+        if datos != nil {
             
-            if ISBN != "" {
             
             do{
                 
                 let json = try NSJSONSerialization.JSONObjectWithData(datos!, options: NSJSONReadingOptions.MutableLeaves)
+                
+                
                 //TITULO
                 let diccionario1 = json as! NSDictionary
-
                 let diccionario2 = diccionario1["ISBN:\(ISBN)"] as! NSDictionary
                 tituloLibro.text = diccionario2["title"] as! NSString as String
                 let diccionario3 = diccionario2["cover"] as! NSDictionary
@@ -67,24 +75,16 @@ class ViewController: UIViewController {
                 let diccionario5 = diccionario4.valueForKey("name")
                 let diccionario6 = diccionario5[0] as! String as String
                 autoresLibro.text = diccionario6
-                
-                
-            }
-                
-                
-            catch _{
+               
                 
             }
+                
+            catch _{}
 
-            
-           
         }else{
-            
-            let alert = UIAlertController(title: "Alert", message: "Type a ISBN", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
-            
-            
         }
         
     }
