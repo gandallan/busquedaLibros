@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
 
+//************ Outlets
     @IBOutlet weak var searchISBN: UITextField!
     
     @IBOutlet weak var tituloLibro: UILabel!
@@ -19,27 +20,24 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var portadaLibro: UIImageView!
     
-    
- 
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
-    
+//************ Clear button
     @IBAction func clear(sender: UIButton) {
         searchISBN.text = ""
     }
     
-    
+//************ Event: Did End On Exit
     @IBAction func buscarISBNButton(sender: UITextField) {
         
         buscasrLibro()
         
     }
-    
-    
     
     func buscasrLibro(){
         
@@ -79,18 +77,19 @@ class ViewController: UIViewController {
                 
             }
                 
-            catch _{}
+            catch {}
 
         }else{
-            let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+            
+            let alert = UIAlertController(title: "Sin Conexión a Internet", message: "Verifica tu conexión a internet", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
         
     }
 
     
-//**funciones para la imagen
+//************ funciones para la imagen
     
     func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
         
@@ -113,8 +112,7 @@ class ViewController: UIViewController {
     }
     
     
-    
-    //*********************Toggle Keboard
+//*********************Toggle Keboard
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
