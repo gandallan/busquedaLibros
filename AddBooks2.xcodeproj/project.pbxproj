@@ -9,31 +9,29 @@
 /* Begin PBXBuildFile section */
 		815B65EA1C4CB38C00F61698 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B65E91C4CB38C00F61698 /* AppDelegate.swift */; };
 		815B65EF1C4CB38C00F61698 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815B65ED1C4CB38C00F61698 /* Main.storyboard */; };
-		815B65F21C4CB38C00F61698 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 815B65F01C4CB38C00F61698 /* Model.xcdatamodeld */; };
+		815B65F21C4CB38C00F61698 /* AddBooks2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 815B65F01C4CB38C00F61698 /* AddBooks2.xcdatamodeld */; };
 		815B65F41C4CB38C00F61698 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 815B65F31C4CB38C00F61698 /* Assets.xcassets */; };
 		815B65F71C4CB38C00F61698 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815B65F51C4CB38C00F61698 /* LaunchScreen.storyboard */; };
 		815B65FF1C4CB42D00F61698 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B65FE1C4CB42D00F61698 /* MainTableViewController.swift */; };
 		815B66011C4D767000F61698 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B66001C4D767000F61698 /* SearchViewController.swift */; };
 		815B66051C4EA5EC00F61698 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B66041C4EA5EC00F61698 /* DetailsViewController.swift */; };
-		815B66091C4F41E800F61698 /* ObjetoLibro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B66081C4F41E800F61698 /* ObjetoLibro.swift */; };
-		816FB3171C51F2640051C32C /* blur_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 816FB3161C51F2640051C32C /* blur_image.jpg */; };
-		816FB3191C58896D0051C32C /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816FB3181C58896D0051C32C /* Device.swift */; };
+		815B66091C4F41E800F61698 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B66081C4F41E800F61698 /* Model.swift */; };
+		81F256061C6338AC00FF8654 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F256051C6338AC00FF8654 /* ProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		815B65E61C4CB38C00F61698 /* AddBooks2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddBooks2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		815B65E91C4CB38C00F61698 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		815B65EE1C4CB38C00F61698 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		815B65F11C4CB38C00F61698 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		815B65F11C4CB38C00F61698 /* AddBooks2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AddBooks2.xcdatamodel; sourceTree = "<group>"; };
 		815B65F31C4CB38C00F61698 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		815B65F61C4CB38C00F61698 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		815B65F81C4CB38C00F61698 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		815B65FE1C4CB42D00F61698 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		815B66001C4D767000F61698 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		815B66041C4EA5EC00F61698 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
-		815B66081C4F41E800F61698 /* ObjetoLibro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjetoLibro.swift; sourceTree = "<group>"; };
-		816FB3161C51F2640051C32C /* blur_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blur_image.jpg; sourceTree = "<group>"; };
-		816FB3181C58896D0051C32C /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = AddBooks2/Device.swift; sourceTree = "<group>"; };
+		815B66081C4F41E800F61698 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		81F256051C6338AC00FF8654 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,11 +45,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		81468B101C6041C2002939C4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				815B65F01C4CB38C00F61698 /* AddBooks2.xcdatamodeld */,
+				815B66081C4F41E800F61698 /* Model.swift */,
+				81F256051C6338AC00FF8654 /* ProgressView.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		81468B111C6041CE002939C4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				815B65E91C4CB38C00F61698 /* AppDelegate.swift */,
+				815B65FE1C4CB42D00F61698 /* MainTableViewController.swift */,
+				815B66001C4D767000F61698 /* SearchViewController.swift */,
+				815B66041C4EA5EC00F61698 /* DetailsViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		81468B121C6041E4002939C4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				815B65ED1C4CB38C00F61698 /* Main.storyboard */,
+				815B65F51C4CB38C00F61698 /* LaunchScreen.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		815B65DD1C4CB38C00F61698 = {
 			isa = PBXGroup;
 			children = (
-				815B65F01C4CB38C00F61698 /* Model.xcdatamodeld */,
-				816FB3181C58896D0051C32C /* Device.swift */,
 				815B65E81C4CB38C00F61698 /* AddBooks2 */,
 				815B65E71C4CB38C00F61698 /* Products */,
 			);
@@ -68,16 +94,11 @@
 		815B65E81C4CB38C00F61698 /* AddBooks2 */ = {
 			isa = PBXGroup;
 			children = (
-				815B65E91C4CB38C00F61698 /* AppDelegate.swift */,
-				815B65FE1C4CB42D00F61698 /* MainTableViewController.swift */,
-				815B66001C4D767000F61698 /* SearchViewController.swift */,
-				815B66041C4EA5EC00F61698 /* DetailsViewController.swift */,
-				815B65ED1C4CB38C00F61698 /* Main.storyboard */,
+				81468B111C6041CE002939C4 /* Controllers */,
+				81468B101C6041C2002939C4 /* Model */,
+				81468B121C6041E4002939C4 /* Views */,
 				815B65F31C4CB38C00F61698 /* Assets.xcassets */,
-				816FB3161C51F2640051C32C /* blur_image.jpg */,
-				815B65F51C4CB38C00F61698 /* LaunchScreen.storyboard */,
 				815B65F81C4CB38C00F61698 /* Info.plist */,
-				815B66081C4F41E800F61698 /* ObjetoLibro.swift */,
 			);
 			path = AddBooks2;
 			sourceTree = "<group>";
@@ -141,7 +162,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				816FB3171C51F2640051C32C /* blur_image.jpg in Resources */,
 				815B65F71C4CB38C00F61698 /* LaunchScreen.storyboard in Resources */,
 				815B65F41C4CB38C00F61698 /* Assets.xcassets in Resources */,
 				815B65EF1C4CB38C00F61698 /* Main.storyboard in Resources */,
@@ -156,11 +176,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				815B65FF1C4CB42D00F61698 /* MainTableViewController.swift in Sources */,
-				815B65F21C4CB38C00F61698 /* Model.xcdatamodeld in Sources */,
+				815B65F21C4CB38C00F61698 /* AddBooks2.xcdatamodeld in Sources */,
 				815B66011C4D767000F61698 /* SearchViewController.swift in Sources */,
-				815B66091C4F41E800F61698 /* ObjetoLibro.swift in Sources */,
+				815B66091C4F41E800F61698 /* Model.swift in Sources */,
+				81F256061C6338AC00FF8654 /* ProgressView.swift in Sources */,
 				815B65EA1C4CB38C00F61698 /* AppDelegate.swift in Sources */,
-				816FB3191C58896D0051C32C /* Device.swift in Sources */,
 				815B66051C4EA5EC00F61698 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,14 +338,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		815B65F01C4CB38C00F61698 /* Model.xcdatamodeld */ = {
+		815B65F01C4CB38C00F61698 /* AddBooks2.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				815B65F11C4CB38C00F61698 /* Model.xcdatamodel */,
+				815B65F11C4CB38C00F61698 /* AddBooks2.xcdatamodel */,
 			);
-			currentVersion = 815B65F11C4CB38C00F61698 /* Model.xcdatamodel */;
-			name = Model.xcdatamodeld;
-			path = AddBooks2/Model.xcdatamodeld;
+			currentVersion = 815B65F11C4CB38C00F61698 /* AddBooks2.xcdatamodel */;
+			path = AddBooks2.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
