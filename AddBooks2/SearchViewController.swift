@@ -41,7 +41,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var authorTitle: UILabel!
     
     @IBOutlet weak var addBookFound: UIBarButtonItem!
-    
+
     
     
 //********* Variables
@@ -123,7 +123,7 @@ class SearchViewController: UIViewController {
         
         if searchISBN.text != ""{
             //*********** 2. Vamos a revisar si ya se realizó antes la busqueda
-        
+
             //accedemos a nuestra entidad de libro
             let libroEntidad = NSEntityDescription.entityForName("Libro", inManagedObjectContext: contexto!)
         
@@ -161,17 +161,20 @@ class SearchViewController: UIViewController {
             catch{
             }
         
-        
+            
             //*********** 4. Si no se encontro el isbn en la entidad, entonces vamos a realizar la busqueda en internet
             buscarLibro(isbn: sender.text!)
-        
+            
             searchISBN.text = ""
         
             print(self.modelo)
         
-
-            formTitle.text = "Title:"
-            authorTitle.text = "Author(s):"
+            
+            
+            
+            
+            
+            
         
         }else{
         
@@ -184,134 +187,144 @@ class SearchViewController: UIViewController {
 //**********Funcion buscarLibro
     
     func buscarLibro(isbn isbn: String){
-
         self.isbn = isbn
         
-    
         //ISBN
         let urls:String = "https://openlibrary.org/api/books?jscmd=data&format=json&bibkeys=ISBN:\(isbn)"
+        
+        
         let url = NSURL(string: urls)!
         let session = NSURLSession.sharedSession()
         
         let task = session.dataTaskWithURL(url, completionHandler:{
             (data, response, error) -> Void in
-            
-            dispatch_async(dispatch_get_main_queue(),{
-                if ((response) != nil){
+            if data?.length != 2{
+                
+                dispatch_async(dispatch_get_main_queue(),{
+                    if ((response) != nil){
                     
-                    ProgressView.sharedInstance.hideProgressView()
+                        self.formTitle.text = "Title:"
+                        self.authorTitle.text = "Author(s):"
                     
-                    //los datos obtenidos los codificamos en UTF8
-                    let texto = NSString(data: data!, encoding: NSUTF8StringEncoding)! as String
+                        //los datos obtenidos los codificamos en UTF8
+                        let texto = NSString(data: data!, encoding: NSUTF8StringEncoding)! as String
                     
-                    if texto.containsString(isbn){
+                        if texto.containsString(isbn){
                         
-                        do{
-                            let jsonData = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-                            let keyJsonData: String = "ISBN:" + isbn
+                            do{
+                                let jsonData = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                                let keyJsonData: String = "ISBN:" + isbn
                             
-                            if let datos = jsonData[keyJsonData] as? NSDictionary{
+                                if let datos = jsonData[keyJsonData] as? NSDictionary{
                                 
-                                self.addBookFound.title = "Add"
+                                    self.addBookFound.title = "Add"
                                 
                                 
-                                //TITULO
-                                if let titulo = datos["title"] as? String{
-                                
-                                    self.bookTitle.text = titulo
-                                    self.tituloAMandar = titulo
-                                    
-                                    self.modelo.titulo.append(self.tituloAMandar)
-                                    self.delegate?.updateData(self.modelo)
+                                    //TITULO
+                                    if let titulo = datos["title"] as? String{
                                     
                                 
-                                }
-                                
-                                //AUTORES
-                                if let autores = datos["authors"] as? NSArray{
+                                        self.bookTitle.text = titulo
+                                        self.tituloAMandar = titulo
                                     
-                                    var index: Int = 0
-                                    for nombreAutor in autores {
-                                        if index == autores.count - 1 {
-                                            
-                                            let autores = nombreAutor["name"] as! String
-                                            
-                                            self.autoresAMandar = autores
-                                            print(autores)
-                                            self.autoresEntidad = self.autoresEntidad + (nombreAutor["name"] as! String)
-                                            
-                                        }else{
-                                            self.autoresEntidad = self.autoresEntidad + (nombreAutor["name"] as! String) + ", "
-                                        }
-                                        ++index
+                                        self.modelo.titulo.append(self.tituloAMandar)
+                                        self.delegate?.updateData(self.modelo)
+                                    
+                                
                                     }
-
-                                  
-                                    self.bookAuthor.text = self.autoresAMandar
-                                    self.modelo.author.append(self.autoresAMandar)
                                 
-
-                                }
-                                
-                                //PORTADA
-                                if let _ = datos["cover"] as? NSDictionary {
-                                    dispatch_async(dispatch_get_main_queue(),{
+                                    //AUTORES
+                                    if let autores = datos["authors"] as? NSArray{
+                                    
+                                        var index: Int = 0
+                                        for nombreAutor in autores {
+                                            if index == autores.count - 1 {
+                                            
+                                                self.autoresEntidad = self.autoresEntidad + (nombreAutor["name"] as! String)
+                                                self.bookAuthor.text = self.bookAuthor.text! + (nombreAutor["name"] as! String)
+                                            
+                                            }else{
+                                            
+                                                self.autoresEntidad = self.autoresEntidad + (nombreAutor["name"] as! String) + ", "
+                                                self.bookAuthor.text = self.bookAuthor.text! + (nombreAutor["name"] as! String) + ", "
+                                            
+                                            }
                                         
-                                        let cover = datos["cover"]
-                                        if cover != nil && cover is NSDictionary{
-                                            
-                                            let covers = datos["cover"] as! NSDictionary
-                                            self.urlImg = NSURL(string: covers["large"] as! NSString as String)
-                                            let img_data = NSData(contentsOfURL: self.urlImg!)
-                                            
-                                            
-                                            self.imagenAMandar = img_data!
-                                            let imagen = UIImage(data: img_data!) // la img_data la convertimos en UIImage
-                                            self.portadaLibro.image = imagen //ahora esa imagen se la asignamos al UIImageView(portadaLibro)
-                                            self.modelo.portada.append(imagen!)//le asignamos al modelo la portada
-                                            
-                                            
-                                            
-                                            self.delegateNuevoDelegado?.mandarTitulo(titulo: self.tituloAMandar, autor: self.autoresAMandar, portada: self.portadaLibro.image!)
-                                            
-                                            // 5. creamos un nuevo objeto dentro de nuestra base de datos
-                                            let nuevoLibroEntidad = NSEntityDescription.insertNewObjectForEntityForName("Libro", inManagedObjectContext: self.contexto!)
-                                            
-                                            nuevoLibroEntidad.setValue(isbn, forKey: "isbn")
-                                            nuevoLibroEntidad.setValue(self.tituloAMandar, forKey: "titulo")
-                                            nuevoLibroEntidad.setValue(self.autoresAMandar, forKey: "autor")
-                                            nuevoLibroEntidad.setValue(self.imagenAMandar, forKey: "portada")
-                                            
-                                            
-                                            
-                                            do {
-                                                try self.contexto?.save()
-                                            }
-                                            catch {
-                                                
-                                            }
-                                
+                                            ++index
                                         }
-                                           ProgressView.sharedInstance.hideProgressView()
-                                    })
-                                 
-                                }
 
+                                        self.autoresAMandar = self.bookAuthor.text!
+                                        self.modelo.author.append(self.autoresAMandar)
                                 
-                            }
-                            
-                            
-                        }catch {
-                            
-                        }
-                    }
 
-                }
-            })
-            
+                                    }
+                                
+                                    //PORTADA
+                                    if let _ = datos["cover"] as? NSDictionary {
+                                        dispatch_async(dispatch_get_main_queue(),{
+                                        
+                                            let cover = datos["cover"]
+                                            if cover != nil && cover is NSDictionary{
+                                            
+                                                let covers = datos["cover"] as! NSDictionary
+                                                self.urlImg = NSURL(string: covers["large"] as! NSString as String)
+                                                let img_data = NSData(contentsOfURL: self.urlImg!)
+                                            
+                                            
+                                                self.imagenAMandar = img_data!
+                                                let imagen = UIImage(data: img_data!) // la img_data la convertimos en UIImage
+                                                self.portadaLibro.image = imagen //ahora esa imagen se la asignamos al UIImageView(portadaLibro)
+                                                self.modelo.portada.append(imagen!)//le asignamos al modelo la portada
+                                            
+                                            
+                                            
+                                                self.delegateNuevoDelegado?.mandarTitulo(titulo: self.tituloAMandar, autor: self.autoresAMandar, portada: self.portadaLibro.image!)
+                                            
+                                                // 5. creamos un nuevo objeto dentro de nuestra base de datos
+                                                let nuevoLibroEntidad = NSEntityDescription.insertNewObjectForEntityForName("Libro", inManagedObjectContext: self.contexto!)
+                                            
+                                                nuevoLibroEntidad.setValue(isbn, forKey: "isbn")
+                                                nuevoLibroEntidad.setValue(self.tituloAMandar, forKey: "titulo")
+                                                nuevoLibroEntidad.setValue(self.autoresAMandar, forKey: "autor")
+                                                nuevoLibroEntidad.setValue(self.imagenAMandar, forKey: "portada")
+                                            
+                                            
+                                            
+                                                do {
+                                                    try self.contexto?.save()
+                                                }
+                                                catch {
+                                                
+                                                }
+                                
+                                            }
+                                    
+                                        })
+                                 
+                                    }else{
+                                    print("no se encontró portada")
+                                    }
+                                    
+                                }
+                            
+                            
+                            }catch {
+                            
+                            }
+                        }
+
+                    }
+                })
+                
+            }else{
+                
+                self.anadirLibroAlert("Añade un ISBN válido.", message: "")
+            }
         })
         
+        
         task.resume()
+        
     }
     
     

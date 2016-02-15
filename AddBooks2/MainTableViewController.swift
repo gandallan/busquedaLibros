@@ -183,8 +183,8 @@ class MainTableViewController: UITableViewController {
         
         cell.textLabel?.text = self.titulos[indexPath.row]
         cell.imageView?.image = self.portadas[indexPath.row]
-        cell.imageView?.layer.cornerRadius =  10
-        cell.imageView?.layer.masksToBounds = true;
+        //cell.imageView?.layer.cornerRadius =  10 //contornea los bordes
+        //cell.imageView?.layer.masksToBounds = true; //contornea los bordes
 
 
         return cell
